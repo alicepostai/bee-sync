@@ -11,9 +11,11 @@ import {
 
   import Ionicons from 'react-native-vector-icons/Ionicons';
   import { useNavigation } from '@react-navigation/native';
+import { AuthenticationStackParams } from '../../utils/Types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-  const PasswordRecovery = () => {
-    const navigation = useNavigation();
+  const PasswordRecovery: React.FC = () => {
+    const navigation = useNavigation<NativeStackNavigationProp<AuthenticationStackParams>>();
 
     const handleGoBack = () => {
       navigation.goBack();
@@ -98,7 +100,7 @@ import {
       fontFamily: fonts.Light,
     },
     recoveryButtonWrapper: {
-      backgroundColor: '#DAA520',
+      backgroundColor: colors.honey,
       borderRadius: 100,
       marginTop: 20,
     },

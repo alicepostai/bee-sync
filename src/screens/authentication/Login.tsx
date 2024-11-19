@@ -6,16 +6,25 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
-import { colors } from '../../utils/Colors';
-import { fonts } from '../../utils/Fonts';
-
+import React, {useState} from 'react';
+import {colors} from '../../utils/Colors';
+import {fonts} from '../../utils/Fonts';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
+import {
+  AuthenticationStackParams,
+  MainAppStackParams,
+} from '../../utils/Types';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-const Login = () => {
-  const navigation = useNavigation();
+const Login: React.FC = () => {
+  type NavigationParams = MainAppStackParams & AuthenticationStackParams;
+
+  const navigation =
+    useNavigation<NativeStackNavigationProp<NavigationParams>>();
   const [secureEntry, setSecureEntry] = useState(true);
 
   const handleGoBack = () => {
@@ -23,16 +32,29 @@ const Login = () => {
   };
 
   const handleSignup = () => {
-    navigation.navigate('signUp');
+    navigation.navigate('SignUp');
   };
 
   const handleForgotPassword = () => {
-    navigation.navigate('passwordRecovery');
+    navigation.navigate('PasswordRecovery');
+  };
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Insira um e-mail válido')
+      .required('E-mail é obrigatório'),
+    password: Yup.string()
+      .min(6, 'A senha deve ter pelo menos 6 caracteres')
+      .required('Senha é obrigatória'),
+  });
+
+  const handleLogin = () => {
+    //validar depois qnd tiver firebase
+    navigation.navigate('HiveList');
   };
 
   return (
     <View style={styles.container}>
-
       <TouchableOpacity style={styles.backButtonWrapper} onPress={handleGoBack}>
         <Ionicons
           name={'arrow-back-outline'}
@@ -46,62 +68,102 @@ const Login = () => {
         <Text style={styles.headingText}>você de volta!</Text>
       </View>
 
-      <View style={styles.formContainer}>
-        <View style={styles.inputContainer}>
-          <Ionicons name={'mail-outline'} size={30} color={colors.secondary} />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Insira seu e-mail"
-            placeholderTextColor={colors.secondary}
-            keyboardType="email-address"
-          />
-        </View>
+      <Formik
+        initialValues={{email: '', password: ''}}
+        validationSchema={validationSchema}
+        onSubmit={handleLogin}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View style={styles.formContainer}>
+            <View style={styles.inputContainer}>
+              <Ionicons
+                name={'mail-outline'}
+                size={30}
+                color={colors.secondary}
+              />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Insira seu e-mail"
+                placeholderTextColor={colors.secondary}
+                keyboardType="email-address"
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+              />
+            </View>
+            {touched.email && errors.email && (
+              <Text style={styles.errorText}>{errors.email}</Text>
+            )}
 
-        <View style={styles.inputContainer}>
-          <SimpleLineIcons name={'lock'} size={30} color={colors.secondary} />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Insira sua senha"
-            placeholderTextColor={colors.secondary}
-            secureTextEntry={secureEntry}
-          />
-          <TouchableOpacity
-            onPress={() => {
-              setSecureEntry((prev) => !prev);
-            }}>
-            <SimpleLineIcons name={'eye'} size={20} color={colors.secondary} />
-          </TouchableOpacity>
-        </View>
+            <View style={styles.inputContainer}>
+              <SimpleLineIcons
+                name={'lock'}
+                size={30}
+                color={colors.secondary}
+              />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Insira sua senha"
+                placeholderTextColor={colors.secondary}
+                secureTextEntry={secureEntry}
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                value={values.password}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  setSecureEntry(prev => !prev);
+                }}>
+                <SimpleLineIcons
+                  name={'eye'}
+                  size={20}
+                  color={colors.secondary}
+                />
+              </TouchableOpacity>
+            </View>
+            {touched.password && errors.password && (
+              <Text style={styles.errorText}>{errors.password}</Text>
+            )}
 
-        <TouchableOpacity onPress={handleForgotPassword}>
-          <Text style={styles.forgotPasswordText}>Esqueceu a senha?</Text>
-        </TouchableOpacity>
+            <TouchableOpacity onPress={handleForgotPassword}>
+              <Text style={styles.forgotPasswordText}>Esqueceu a senha?</Text>
+            </TouchableOpacity>
 
-        <TouchableOpacity style={styles.loginButtonWrapper}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.loginButtonWrapper}
+              onPress={() => handleSubmit()}>
+              <Text style={styles.loginText}>Login</Text>
+            </TouchableOpacity>
 
-        <View style={styles.orContainer}>
-          <View style={styles.line} />
-          <Text style={styles.orText}>OU</Text>
-          <View style={styles.line} />
-        </View>
+            <View style={styles.orContainer}>
+              <View style={styles.line} />
+              <Text style={styles.orText}>OU</Text>
+              <View style={styles.line} />
+            </View>
 
-        <TouchableOpacity style={styles.googleButtonContainer}>
-          <Image
-            source={require('../../assets/google.png')}
-            style={styles.googleImage}
-          />
-          <Text style={styles.googleText}>Google</Text>
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.googleButtonContainer}>
+              <Image
+                source={require('../../assets/google.png')}
+                style={styles.googleImage}
+              />
+              <Text style={styles.googleText}>Continuar com o Google</Text>
+            </TouchableOpacity>
 
-        <View style={styles.footerContainer}>
-          <Text style={styles.accountText}>Não possui uma conta?</Text>
-          <TouchableOpacity onPress={handleSignup}>
-            <Text style={styles.signupText}>Cadastre-se</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+            <View style={styles.footerContainer}>
+              <Text style={styles.accountText}>Não possui uma conta?</Text>
+              <TouchableOpacity onPress={handleSignup}>
+                <Text style={styles.signupText}>Cadastre-se</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
+      </Formik>
     </View>
   );
 };
@@ -148,6 +210,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontFamily: fonts.Light,
   },
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+    marginTop: -5,
+    marginBottom: 10,
+    fontFamily: fonts.Regular,
+  },
   forgotPasswordText: {
     textAlign: 'right',
     color: colors.primary,
@@ -155,7 +224,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   loginButtonWrapper: {
-    backgroundColor: '#DAA520',
+    backgroundColor: colors.honey,
     borderRadius: 100,
     marginTop: 20,
   },
