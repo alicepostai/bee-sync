@@ -3,17 +3,20 @@ import React from 'react';
 import { colors } from '../../utils/Colors';
 import { fonts } from '../../utils/Fonts';
 import { useNavigation } from '@react-navigation/native';
+import { AuthenticationStackParams } from '../../utils/Types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-const Home = () => {
-  const navigation = useNavigation();
+const Home: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<AuthenticationStackParams>>();
 
   const handleLogin = () => {
-    navigation.navigate('login');
+    navigation.navigate('Login');
   };
 
   const handleSignup = () => {
-    navigation.navigate('signUp');
+    navigation.navigate('SignUp');
   };
+
   return (
     <View style={styles.container}>
 
@@ -41,7 +44,7 @@ const Home = () => {
           style={[styles.loginButtonWrapper]}
           onPress={handleSignup}
         >
-          <Text style={styles.signupButtonText}>Sign-up</Text>
+          <Text style={styles.signupButtonText}>Cadastro</Text>
         </TouchableOpacity>
       </View>
     </View>

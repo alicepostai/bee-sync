@@ -3,5 +3,5 @@ export const colors = {
     primary: '#45484A',
     secondary: '#AEB5BB',
     gray: '#D9D9D9',
-    honey: '#DAA520',
+    honey: '#f2a65a',
   };

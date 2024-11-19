@@ -13,103 +13,129 @@ import { fonts } from '../../utils/Fonts';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import { useNavigation } from '@react-navigation/native';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { AuthenticationStackParams } from '../../utils/Types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-const SignupScreen = () => {
-  const navigation = useNavigation();
-  const [secureEntery, setSecureEntery] = useState(true);
+const SignupScreen: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<AuthenticationStackParams>>();
+  const [secureEntry, setSecureEntry] = useState(true);
 
   const handleGoBack = () => {
     navigation.goBack();
   };
 
   const handleLogin = () => {
-    navigation.navigate('login');
+    navigation.navigate('Login');
   };
 
+  const SignupSchema = Yup.object().shape({
+    email: Yup.string().email('Email inválido').required('Email obrigatório'),
+    password: Yup.string()
+      .min(6, 'A senha deve ter pelo menos 6 caracteres')
+      .required('Senha obrigatória'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password')], 'As senhas devem corresponder')
+      .required('Confirmação de senha obrigatória'),
+  });
+
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.backButtonWrapper} onPress={handleGoBack}>
-        <Ionicons
-          name={'arrow-back-outline'}
-          color={colors.primary}
-          size={25}
-        />
-      </TouchableOpacity>
-
-      <View style={styles.textContainer}>
-        <Text style={styles.headingText}>Faça seu</Text>
-        <Text style={styles.headingText}>cadastro</Text>
-      </View>
-
-      <View style={styles.formContainer}>
-        <View style={styles.inputContainer}>
-          <Ionicons name={'mail-outline'} size={30} color={colors.secondary} />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Insira seu e-mail"
-            placeholderTextColor={colors.secondary}
-            keyboardType="email-address"
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <SimpleLineIcons name={'lock'} size={30} color={colors.secondary} />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Insira sua senha"
-            placeholderTextColor={colors.secondary}
-            secureTextEntry={secureEntery}
-          />
-          <TouchableOpacity
-            onPress={() => {
-              setSecureEntery(prev => !prev);
-            }}>
-            <SimpleLineIcons name={'eye'} size={20} color={colors.secondary} />
+    <Formik
+      initialValues={{ email: '', password: '', confirmPassword: '' }}
+      validationSchema={SignupSchema}
+      onSubmit={(values) => {
+        console.log('Form values', values);
+        //add logica de cadastro
+      }}
+    >
+      {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.backButtonWrapper} onPress={handleGoBack}>
+            <Ionicons name={'arrow-back-outline'} color={colors.primary} size={25} />
           </TouchableOpacity>
+
+          <View style={styles.textContainer}>
+            <Text style={styles.headingText}>Faça seu</Text>
+            <Text style={styles.headingText}>cadastro</Text>
+          </View>
+
+          <View style={styles.formContainer}>
+            <View style={styles.inputContainer}>
+              <Ionicons name={'mail-outline'} size={30} color={colors.secondary} />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Insira seu e-mail"
+                placeholderTextColor={colors.secondary}
+                keyboardType="email-address"
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+              />
+            </View>
+            {errors.email && touched.email && <Text style={styles.errorText}>{errors.email}</Text>}
+
+            <View style={styles.inputContainer}>
+              <SimpleLineIcons name={'lock'} size={30} color={colors.secondary} />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Insira sua senha"
+                placeholderTextColor={colors.secondary}
+                secureTextEntry={secureEntry}
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                value={values.password}
+              />
+              <TouchableOpacity onPress={() => setSecureEntry((prev) => !prev)}>
+                <SimpleLineIcons name={'eye'} size={20} color={colors.secondary} />
+              </TouchableOpacity>
+            </View>
+            {errors.password && touched.password && <Text style={styles.errorText}>{errors.password}</Text>}
+
+            <View style={styles.inputContainer}>
+              <SimpleLineIcons name={'lock'} size={30} color={colors.secondary} />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Confirme sua senha"
+                placeholderTextColor={colors.secondary}
+                secureTextEntry={secureEntry}
+                onChangeText={handleChange('confirmPassword')}
+                onBlur={handleBlur('confirmPassword')}
+                value={values.confirmPassword}
+              />
+              <TouchableOpacity onPress={() => setSecureEntry((prev) => !prev)}>
+                <SimpleLineIcons name={'eye'} size={20} color={colors.secondary} />
+              </TouchableOpacity>
+            </View>
+            {errors.confirmPassword && touched.confirmPassword && (
+              <Text style={styles.errorText}>{errors.confirmPassword}</Text>
+            )}
+
+            <TouchableOpacity style={styles.signUpButtonWrapper} onPress={() => handleSubmit()}>
+              <Text style={styles.signUpText}>Cadastrar</Text>
+            </TouchableOpacity>
+
+            <View style={styles.orContainer}>
+              <View style={styles.line} />
+              <Text style={styles.orText}>OU</Text>
+              <View style={styles.line} />
+            </View>
+
+            <TouchableOpacity style={styles.googleButtonContainer}>
+              <Image source={require('../../assets/google.png')} style={styles.googleImage} />
+              <Text style={styles.googleText}>Continuar com o Google</Text>
+            </TouchableOpacity>
+
+            <View style={styles.footerContainer}>
+              <Text style={styles.accountText}>Já possui uma conta?</Text>
+              <TouchableOpacity onPress={handleLogin}>
+                <Text style={styles.loginText}>Login</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
-
-        <View style={styles.inputContainer}>
-          <SimpleLineIcons name={'lock'} size={30} color={colors.secondary} />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Confirme sua senha"
-            placeholderTextColor={colors.secondary}
-            secureTextEntry={secureEntery}
-          />
-          <TouchableOpacity
-            onPress={() => {
-              setSecureEntery(prev => !prev);
-            }}>
-            <SimpleLineIcons name={'eye'} size={20} color={colors.secondary} />
-          </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity style={styles.loginButtonWrapper}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
-
-        <View style={styles.orContainer}>
-          <View style={styles.line} />
-          <Text style={styles.orText}>OU</Text>
-          <View style={styles.line} />
-        </View>
-
-        <TouchableOpacity style={styles.googleButtonContainer}>
-          <Image
-            source={require('../../assets/google.png')}
-            style={styles.googleImage}
-          />
-          <Text style={styles.googleText}>Continuar com o Google</Text>
-        </TouchableOpacity>
-
-        <View style={styles.footerContainer}>
-          <Text style={styles.accountText}>Já possui uma conta?</Text>
-          <TouchableOpacity onPress={handleLogin}>
-            <Text style={styles.signupText}>Login</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
+      )}
+    </Formik>
   );
 };
 
@@ -155,63 +181,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontFamily: fonts.Light,
   },
-  forgotPasswordText: {
-    textAlign: 'right',
-    color: colors.primary,
-    fontFamily: fonts.SemiBold,
-    marginVertical: 10,
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+    marginLeft: 20,
+    marginTop: -8,
   },
-  loginButtonWrapper: {
+  signUpButtonWrapper: {
     backgroundColor: colors.honey,
     borderRadius: 100,
     marginTop: 20,
   },
-  loginText: {
+  signUpText: {
     color: colors.white,
     fontSize: 20,
     fontFamily: fonts.SemiBold,
     textAlign: 'center',
     padding: 10,
-  },
-  continueText: {
-    textAlign: 'center',
-    marginVertical: 20,
-    fontSize: 14,
-    fontFamily: fonts.Regular,
-    color: colors.primary,
-  },
-  googleButtonContainer: {
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: colors.primary,
-    borderRadius: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-    gap: 10,
-  },
-  googleImage: {
-    height: 20,
-    width: 20,
-  },
-  googleText: {
-    fontSize: 20,
-    fontFamily: fonts.SemiBold,
-  },
-  footerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: 20,
-    gap: 5,
-  },
-  accountText: {
-    color: colors.primary,
-    fontFamily: fonts.Regular,
-  },
-  signupText: {
-    color: colors.honey,
-    fontFamily: fonts.Bold,
   },
   orContainer: {
     flexDirection: 'row',
@@ -229,5 +215,38 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#000',
     paddingHorizontal: 10,
+  },
+  googleButtonContainer: {
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: colors.primary,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  },
+  googleImage: {
+    height: 20,
+    width: 20,
+    marginRight: 10,
+  },
+  googleText: {
+    fontSize: 18,
+    fontFamily: fonts.SemiBold,
+  },
+  footerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 20,
+    gap: 5,
+  },
+  accountText: {
+    color: colors.primary,
+    fontFamily: fonts.Regular,
+  },
+  loginText: {
+    color: colors.honey,
+    fontFamily: fonts.Bold,
   },
 });
