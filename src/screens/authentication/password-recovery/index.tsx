@@ -5,14 +5,16 @@ import {
     TouchableOpacity,
     View,
   } from 'react-native';
-  import React from 'react';
-  import { colors } from '../../utils/Colors';
-  import { fonts } from '../../utils/Fonts';
+  import React, { FC } from 'react';
 
   import Ionicons from 'react-native-vector-icons/Ionicons';
   import { useNavigation } from '@react-navigation/native';
+import { colors } from '../../../utils/Colors';
+import { fonts } from '../../../utils/Fonts';
+import { AuthStackParams } from '../../../../types';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-  const PasswordRecovery: React.FC = () => {
+  const PasswordRecovery: FC<NativeStackScreenProps<AuthStackParams, 'passwordRecovery'>> = () => {
     const navigation = useNavigation();
 
     const handleGoBack = () => {

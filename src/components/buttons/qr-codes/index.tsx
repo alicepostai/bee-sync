@@ -2,8 +2,8 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import { colors } from '../../utils/Colors';
-import Styles from '../../utils/Styles';
+import { colors } from '../../../utils/Colors';
+import Styles from '../../../utils/Styles';
 
 const QRCodesButton: React.FC = () => {
   const navigation = useNavigation();

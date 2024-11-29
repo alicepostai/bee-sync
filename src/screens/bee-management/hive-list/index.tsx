@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { colors } from '../../utils/Colors';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParams } from '../../../types';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { BottomTabParams } from '../../../../types';
+import { colors } from '../../../utils/Colors';
 
-const SwarmListScreen: React.FC = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
+const HiveList: FC<NativeStackScreenProps<BottomTabParams, 'hiveList'>> = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<{Root: any; Authentication: any; BottomTab: any}>>();
   const [swarms, setSwarms] = useState<
     { id: string; name: string; species: string; captureDate: string; imageUrl: string | null }[]
   >([]);
@@ -85,7 +85,7 @@ const SwarmListScreen: React.FC = () => {
   );
 };
 
-export default SwarmListScreen;
+export default HiveList;
 
 const styles = StyleSheet.create({
   container: {

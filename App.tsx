@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
-import NavigationController from './src/navigations/NavigationController';
+import NavigationController from './src/navigations/navigation-controller';
 
 
 const App: FC = () => {

@@ -6,17 +6,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
-import { colors } from '../../utils/Colors';
-import { fonts } from '../../utils/Fonts';
+import React, { FC, useState } from 'react';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { colors } from '../../../utils/Colors';
+import { fonts } from '../../../utils/Fonts';
+import { AuthStackParams } from '../../../../types';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-const SignupScreen: React.FC = () => {
+const SignupScreen: FC<NativeStackScreenProps<AuthStackParams, 'signUp'>> = () => {
   const navigation = useNavigation();
   const [secureEntry, setSecureEntry] = useState(true);
 

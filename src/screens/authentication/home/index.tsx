@@ -1,10 +1,12 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
-import { colors } from '../../utils/Colors';
-import { fonts } from '../../utils/Fonts';
+import React, { FC } from 'react';
+import { colors } from '../../../utils/Colors';
+import { fonts } from '../../../utils/Fonts';
 import { useNavigation } from '@react-navigation/native';
+import { AuthStackParams } from '../../../../types';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-const Home: React.FC = () => {
+const Home: FC<NativeStackScreenProps<AuthStackParams, 'home'>> = () => {
   const navigation = useNavigation();
 
   const handleLogin = () => {

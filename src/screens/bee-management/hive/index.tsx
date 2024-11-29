@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React, { FC } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParams } from '../../../types';
+import { MainAppParams } from '../../../../types';
 
-const Hive: FC<NativeStackScreenProps<RootStackParams, 'Hive'>> = ({route}) => {
+const Hive: FC<NativeStackScreenProps<MainAppParams, 'hive'>> = ({route}) => {
   let id = route.params.id;
   return (
     <View>
@@ -13,5 +13,3 @@ const Hive: FC<NativeStackScreenProps<RootStackParams, 'Hive'>> = ({route}) => {
 };
 
 export default Hive;
-
-const styles = StyleSheet.create({});

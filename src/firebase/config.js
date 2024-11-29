@@ -3,13 +3,12 @@ import '@firebase/auth';
 import '@firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCtpIRdazOa5JxuqQ0sABNd3EolSbtEHAI',
-  authDomain: 'your-auth-domain-b1234.firebaseapp.com',
-  databaseURL: 'https://your-database-name.firebaseio.com',
-  projectId: 'your-project-id-1234',
-  storageBucket: 'your-project-id-1234.appspot.com',
-  messagingSenderId: '',
-  appId: '1:569074197497:android:f2cf208005d92d0f279328',
+  apiKey: "AIzaSyCigxfy5fiVyhildB5m64LkI5HTbysWb6A",
+  authDomain: "beesync-6f427.firebaseapp.com",
+  projectId: "beesync-6f427",
+  storageBucket: "beesync-6f427.firebasestorage.app",
+  messagingSenderId: "569074197497",
+  appId: "1:569074197497:web:6362dc892fc8dc63279328"
 };
 
 if (!firebase.apps.length) {

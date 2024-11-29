@@ -1,18 +1,20 @@
-import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
+import React, { FC } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ComboBox from '../../components/forms/ComboBox';
-import { colors } from '../../utils/Colors';
-import { species } from '../../constants/lists/BeeSpeciesList';
-import { states } from '../../constants/lists/States';
-import { hiveOrigin } from '../../constants/lists/HiveOrigin';
-import { boxType } from '../../constants/lists/BoxType';
-import { fonts } from '../../utils/Fonts';
+import * as Yup from 'yup';
+import ComboBox from '../../../components/forms/combo-box';
+import { species } from '../../../constants/lists/BeeSpeciesList';
+import { boxType } from '../../../constants/lists/BoxType';
+import { hiveOrigin } from '../../../constants/lists/HiveOrigin';
+import { states } from '../../../constants/lists/States';
+import { colors } from '../../../utils/Colors';
+import { fonts } from '../../../utils/Fonts';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { MainAppParams } from '../../../../types';
 
-const HiveRegistration: React.FC = () => {
+const HiveRegistration: FC<NativeStackScreenProps<MainAppParams, 'hiveRegistration'>> = () => {
   const navigation = useNavigation();
 
   const handleGoBack = () => {

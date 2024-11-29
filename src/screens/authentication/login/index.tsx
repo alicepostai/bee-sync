@@ -6,16 +6,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {colors} from '../../utils/Colors';
-import {fonts} from '../../utils/Fonts';
+import React, {FC, useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {useNavigation} from '@react-navigation/native';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import { colors } from '../../../utils/Colors';
+import { fonts } from '../../../utils/Fonts';
+import { AuthStackParams } from '../../../../types';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-const Login: React.FC = () => {
+const Login: FC<NativeStackScreenProps<AuthStackParams, 'login'>> = () => {
   const navigation =
     useNavigation();
   const [secureEntry, setSecureEntry] = useState(true);
@@ -25,11 +27,11 @@ const Login: React.FC = () => {
   };
 
   const handleSignup = () => {
-    navigation.navigate('Authentication', { screen: 'SignUp' });
+    navigation.navigate('authentication', { screen: 'signUp' });
   };
 
   const handleForgotPassword = () => {
-    navigation.navigate('Authentication', { screen: 'PasswordRecovery' });
+    navigation.navigate('authentication', { screen: 'passwordRecovery' });
   };
 
   const validationSchema = Yup.object().shape({

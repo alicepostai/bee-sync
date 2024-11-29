@@ -1,28 +1,29 @@
 export type RootStackParams = {
-    hiveList: never;
-    data: never;
-    map: never;
-    history: never;
-    Profile: UserData;
-    AppSettings: never;
-    Hive: HiveData;
-    HiveRegistration: never;
-    QRCodes: never;
+    mainApp: MainAppParams;
+    authentication: AuthStackParams;
+    bottomTab: BottomTabParams;
+}
+
+export type MainAppParams = {
+    appSettings: never;
+    hive: HiveData;
+    hiveRegistration: never;
+    qrCodes: never;
 };
 
 export type BottomTabParams = {
     hiveList: never;
-    Data: never;
-    Map: never;
-    History: never;
-    Profile: UserData;
+    generalData: never;
+    map: never;
+    history: never;
+    profile: UserData;
 };
 
 export type AuthStackParams = {
-    Home: never;
-    Login: never;
-    SignUp: never;
-    PasswordRecovery: never;
+    home: never;
+    login: never;
+    signUp: never;
+    passwordRecovery: never;
 };
 
 export type UserData = {
