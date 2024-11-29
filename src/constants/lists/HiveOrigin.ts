@@ -1,4 +1,4 @@
-import { ListItem } from '../../utils/Types';
+import { ListItem } from '../../../types';
 
 export const hiveOrigin : ListItem[] = [
     { id: 1, name: 'Captura' },

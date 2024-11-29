@@ -3,11 +3,9 @@ import React from 'react';
 import { colors } from '../../utils/Colors';
 import { fonts } from '../../utils/Fonts';
 import { useNavigation } from '@react-navigation/native';
-import { AuthenticationStackParams } from '../../utils/Types';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const Home: React.FC = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<AuthenticationStackParams>>();
+  const navigation = useNavigation();
 
   const handleLogin = () => {
     navigation.navigate('Login');
@@ -20,8 +18,8 @@ const Home: React.FC = () => {
   return (
     <View style={styles.container}>
 
-      <Image source={require('../../assets/logo.png')} style={styles.logo} />
-      <Image source={require('../../assets/homeImage.jpg')} style={styles.bannerImage} />
+      <Image source={require('../../../assets/google.png')} style={styles.logo} />
+      <Image source={require('../../../assets/homeImage.jpg')} style={styles.bannerImage} />
 
       <Text style={styles.title}>Lorem ipsum dolor.</Text>
       <Text style={styles.subTitle}>

@@ -14,17 +14,10 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {useNavigation} from '@react-navigation/native';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import {
-  AuthenticationStackParams,
-  MainAppStackParams,
-} from '../../utils/Types';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const Login: React.FC = () => {
-  type NavigationParams = MainAppStackParams & AuthenticationStackParams;
-
   const navigation =
-    useNavigation<NativeStackNavigationProp<NavigationParams>>();
+    useNavigation();
   const [secureEntry, setSecureEntry] = useState(true);
 
   const handleGoBack = () => {
@@ -32,11 +25,11 @@ const Login: React.FC = () => {
   };
 
   const handleSignup = () => {
-    navigation.navigate('SignUp');
+    navigation.navigate('Authentication', { screen: 'SignUp' });
   };
 
   const handleForgotPassword = () => {
-    navigation.navigate('PasswordRecovery');
+    navigation.navigate('Authentication', { screen: 'PasswordRecovery' });
   };
 
   const validationSchema = Yup.object().shape({
@@ -50,7 +43,7 @@ const Login: React.FC = () => {
 
   const handleLogin = () => {
     //validar depois qnd tiver firebase
-    navigation.navigate('HiveList');
+    navigation.navigate('BottomTab', { screen: 'HiveList' });
   };
 
   return (
@@ -149,7 +142,7 @@ const Login: React.FC = () => {
 
             <TouchableOpacity style={styles.googleButtonContainer}>
               <Image
-                source={require('../../assets/google.png')}
+                source={require('../../../assets/google.png')}
                 style={styles.googleImage}
               />
               <Text style={styles.googleText}>Continuar com o Google</Text>

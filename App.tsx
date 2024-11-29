@@ -1,13 +1,15 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import RootStackNavigator from './src/navigation/RootStackNavigator';
+import React, { FC } from 'react';
+import { StyleSheet } from 'react-native';
+import NavigationController from './src/navigations/NavigationController';
 
-const App = () => {
+
+const App: FC = () => {
   return (
-    <NavigationContainer>
-      <RootStackNavigator />
-    </NavigationContainer>
+    <NavigationController/>
   );
 };
 
+
 export default App;
+
+const styles = StyleSheet.create({});

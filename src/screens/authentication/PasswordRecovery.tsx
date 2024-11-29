@@ -11,11 +11,9 @@ import {
 
   import Ionicons from 'react-native-vector-icons/Ionicons';
   import { useNavigation } from '@react-navigation/native';
-import { AuthenticationStackParams } from '../../utils/Types';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
   const PasswordRecovery: React.FC = () => {
-    const navigation = useNavigation<NativeStackNavigationProp<AuthenticationStackParams>>();
+    const navigation = useNavigation();
 
     const handleGoBack = () => {
       navigation.goBack();

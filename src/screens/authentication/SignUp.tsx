@@ -15,11 +15,9 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { AuthenticationStackParams } from '../../utils/Types';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const SignupScreen: React.FC = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<AuthenticationStackParams>>();
+  const navigation = useNavigation();
   const [secureEntry, setSecureEntry] = useState(true);
 
   const handleGoBack = () => {
@@ -122,7 +120,7 @@ const SignupScreen: React.FC = () => {
             </View>
 
             <TouchableOpacity style={styles.googleButtonContainer}>
-              <Image source={require('../../assets/google.png')} style={styles.googleImage} />
+              <Image source={require('../../../assets/google.png')} style={styles.googleImage} />
               <Text style={styles.googleText}>Continuar com o Google</Text>
             </TouchableOpacity>
 

@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-const HiveData = () => {
+const AppSettings = () => {
   return (
     <View>
-      <Text>HiveData</Text>
+      <Text>Settings</Text>
     </View>
   );
 };
 
-export default HiveData;
+export default AppSettings;
 
 const styles = StyleSheet.create({});

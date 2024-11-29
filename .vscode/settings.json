@@ -5,7 +5,7 @@
 		"android/": true,
 		"ios/": true,
 		"*lock.json": true,
-		"*config*": true,
+		//"*config*": true,
 		"Gemfile": true,
 		".ruby-version": true,
 		".eslintrc.js": true,

@@ -4,10 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors } from '../../utils/Colors';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { MainAppStackParams } from '../../utils/Types';
+import { RootStackParams } from '../../../types';
 
 const SwarmListScreen: React.FC = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<MainAppStackParams>>();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const [swarms, setSwarms] = useState<
     { id: string; name: string; species: string; captureDate: string; imageUrl: string | null }[]
   >([]);
@@ -38,12 +38,12 @@ const SwarmListScreen: React.FC = () => {
   const renderSwarmItem = ({
     item,
   }: {
-    item: { id: string; name: string; species: string; captureDate: string; imageUrl: string | null };
+    item: { id: number; name: string; species: string; captureDate: string; imageUrl: string | null };
   }) => (
     <View style={styles.swarmCard}>
-      <TouchableOpacity onPress={() => navigation.navigate('HiveData', { id: item.id })} style={styles.swarmCard}>
+      <TouchableOpacity onPress={() => navigation.navigate('Root', {screen: 'Hive', params: { id: item.id }})} style={styles.swarmCard}>
         <Image
-          source={item.imageUrl ? { uri: item.imageUrl } : require('../../assets/google.png')}
+          source={item.imageUrl ? { uri: item.imageUrl } : require('../../../assets/google.png')}
           style={styles.swarmImage}
         />
         <View style={styles.swarmInfo}>
@@ -57,7 +57,7 @@ const SwarmListScreen: React.FC = () => {
   );
 
   const handleAddSwarm = () => {
-    navigation.navigate('HiveRegistration');
+    navigation.navigate('Root', { screen: 'HiveRegistration' });
   };
 
   return (

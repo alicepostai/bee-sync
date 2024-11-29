@@ -1,4 +1,4 @@
-import { BeeSpecies } from '../../utils/Types';
+import { BeeSpecies } from '../../../types';
 
 export const species : BeeSpecies[] = [
     { id: 1, name: 'Mombucão, Mombuca', scientificName: 'Cephalotrigona capitata', imageUrl: 'https://abelha.org.br/wp-content/uploads/2023/06/Cephalo_capitata.jpg' },

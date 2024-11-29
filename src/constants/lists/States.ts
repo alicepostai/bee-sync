@@ -1,4 +1,4 @@
-import { ListItem } from '../../utils/Types';
+import { ListItem } from '../../../types';
 
 export const states : ListItem[] = [
     { id: 1, name: 'Acre (AC)' },

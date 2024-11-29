@@ -4,11 +4,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { colors } from '../../utils/Colors';
 import Styles from '../../utils/Styles';
-import { BeeManagementStackParams } from '../../utils/Types';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const QRCodesButton: React.FC = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<BeeManagementStackParams>>();
+  const navigation = useNavigation();
 
   return (
     <TouchableOpacity

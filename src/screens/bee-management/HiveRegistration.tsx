@@ -5,17 +5,15 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ComboBox from '../../components/forms/ComboBox';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors } from '../../utils/Colors';
-import { species } from '../../data/lists/BeeSpeciesList';
-import { states } from '../../data/lists/States';
-import { hiveOrigin } from '../../data/lists/HiveOrigin';
-import { boxType } from '../../data/lists/BoxType';
+import { species } from '../../constants/lists/BeeSpeciesList';
+import { states } from '../../constants/lists/States';
+import { hiveOrigin } from '../../constants/lists/HiveOrigin';
+import { boxType } from '../../constants/lists/BoxType';
 import { fonts } from '../../utils/Fonts';
-import { MainAppStackParams } from '../../utils/Types';
 
 const HiveRegistration: React.FC = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<MainAppStackParams>>();
+  const navigation = useNavigation();
 
   const handleGoBack = () => {
     navigation.goBack();
