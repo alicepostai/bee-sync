@@ -5,11 +5,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { BottomTabParams } from '../../../types';
 import QRCodesButton from '../../components/buttons/qr-codes';
 import SettingsButton from '../../components/buttons/settings';
-import { ActionHistory, HiveList, Map } from '../../screens/bee-management';
-import Profile from '../../screens/user/profile';
-import { colors } from '../../utils/Colors';
-import Styles from '../../utils/Styles';
+import ActionHistory from '../../screens/bee-management/action-history';
 import GeneralData from '../../screens/bee-management/general-data';
+import HiveList from '../../screens/bee-management/hive-list';
+import Map from '../../screens/bee-management/map';
+import Profile from '../../screens/user/profile';
+import Styles from '../../utils/Styles';
+import { colors } from '../../utils/Colors';
 
 const BottomTab:FC = () => {
     const Tab = createBottomTabNavigator<BottomTabParams>();
@@ -39,23 +41,23 @@ const BottomTab:FC = () => {
     );
 };
 
-const getTabBarIcon = ({route, color, size}:iconProps) => {
+const getTabBarIcon = ({route, size, color}:iconProps) => {
     let iconName = '';
 
-    if (route.name === 'HiveList') {
+    if (route.name === 'hiveList') {
       iconName = 'list';
-    } else if (route.name === 'Data') {
+    } else if (route.name === 'generalData') {
       iconName = 'bar-chart-outline';
-    } else if (route.name === 'Map') {
+    } else if (route.name === 'map') {
       iconName = 'map-outline';
-    } else if (route.name === 'History') {
+    } else if (route.name === 'history') {
       iconName = 'receipt-outline';
-    } else if (route.name === 'Profile') {
+    } else if (route.name === 'profile') {
       iconName = 'person-outline';
     }
     return <Ionicons name={iconName} size={size} color={color} />;
 };
 
-  type iconProps = {route: {name: String}, color: ColorValue | number | undefined, size: number};
+  type iconProps = {route: {name: String}, size: number, color: ColorValue | number | undefined};
 
 export default BottomTab;

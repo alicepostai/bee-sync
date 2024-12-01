@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MainAppParams } from '../../../types';
-import { HiveRegistration, QRCodes } from '../../screens/bee-management';
 import AppSettings from '../../screens/user/app-settings';
-import Hive from '../../screens/bee-management/Hive';
+
+import QRCodes from '../../screens/bee-management/qr-codes';
+import HiveRegistration from '../../screens/bee-management/hive-registration';
+import Hive from '../../screens/bee-management/hive';
 
 const MainApp:FC = () => {
     const Stack = createNativeStackNavigator<MainAppParams>();

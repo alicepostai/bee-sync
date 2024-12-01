@@ -15,11 +15,11 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { colors } from '../../../utils/Colors';
 import { fonts } from '../../../utils/Fonts';
-import { AuthStackParams } from '../../../../types';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AuthStackParams, RootStackParams } from '../../../../types';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 
 const SignupScreen: FC<NativeStackScreenProps<AuthStackParams, 'signUp'>> = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const [secureEntry, setSecureEntry] = useState(true);
 
   const handleGoBack = () => {
@@ -27,7 +27,7 @@ const SignupScreen: FC<NativeStackScreenProps<AuthStackParams, 'signUp'>> = () =
   };
 
   const handleLogin = () => {
-    navigation.navigate('Login');
+    navigation.navigate('authentication', { screen: 'login' });
   };
 
   const SignupSchema = Yup.object().shape({
@@ -122,7 +122,7 @@ const SignupScreen: FC<NativeStackScreenProps<AuthStackParams, 'signUp'>> = () =
             </View>
 
             <TouchableOpacity style={styles.googleButtonContainer}>
-              <Image source={require('../../../assets/google.png')} style={styles.googleImage} />
+              <Image source={require('../../../../assets/google.png')} style={styles.googleImage} />
               <Text style={styles.googleText}>Continuar com o Google</Text>
             </TouchableOpacity>
 

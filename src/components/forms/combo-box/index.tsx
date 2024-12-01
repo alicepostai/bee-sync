@@ -1,11 +1,10 @@
-// @ts-nocheck
 import React, { FC, useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, FlatList, Image, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
-import { colors } from '../../utils/Colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { fonts } from '../../utils/Fonts';
-import { ComboBoxProps, ListItem } from '../../types';
+import { ComboBoxProps, ListItem } from '../../../../types';
+import { colors } from '../../../utils/Colors';
+import { fonts } from '../../../utils/Fonts';
 
 
 const ComboBox : FC<ComboBoxProps> = ({ list, placeholder, iconName }) => {

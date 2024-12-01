@@ -3,11 +3,11 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, TextInput } 
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
-import { BottomTabParams } from '../../../../types';
+import { BottomTabParams, RootStackParams } from '../../../../types';
 import { colors } from '../../../utils/Colors';
 
 const HiveList: FC<NativeStackScreenProps<BottomTabParams, 'hiveList'>> = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<{Root: any; Authentication: any; BottomTab: any}>>();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const [swarms, setSwarms] = useState<
     { id: string; name: string; species: string; captureDate: string; imageUrl: string | null }[]
   >([]);
@@ -41,9 +41,9 @@ const HiveList: FC<NativeStackScreenProps<BottomTabParams, 'hiveList'>> = () => 
     item: { id: number; name: string; species: string; captureDate: string; imageUrl: string | null };
   }) => (
     <View style={styles.swarmCard}>
-      <TouchableOpacity onPress={() => navigation.navigate('Root', {screen: 'Hive', params: { id: item.id }})} style={styles.swarmCard}>
+      <TouchableOpacity onPress={() => navigation.navigate('mainApp', {screen: 'hive', params: { id: item.id }})} style={styles.swarmCard}>
         <Image
-          source={item.imageUrl ? { uri: item.imageUrl } : require('../../../assets/google.png')}
+          source={item.imageUrl ? { uri: item.imageUrl } : require('../../../../assets/google.png')}
           style={styles.swarmImage}
         />
         <View style={styles.swarmInfo}>
@@ -57,7 +57,7 @@ const HiveList: FC<NativeStackScreenProps<BottomTabParams, 'hiveList'>> = () => 
   );
 
   const handleAddSwarm = () => {
-    navigation.navigate('Root', { screen: 'HiveRegistration' });
+    navigation.navigate('mainApp', { screen: 'hiveRegistration' });
   };
 
   return (

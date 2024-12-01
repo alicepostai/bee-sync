@@ -14,12 +14,11 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import { colors } from '../../../utils/Colors';
 import { fonts } from '../../../utils/Fonts';
-import { AuthStackParams } from '../../../../types';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AuthStackParams, RootStackParams } from '../../../../types';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 
 const Login: FC<NativeStackScreenProps<AuthStackParams, 'login'>> = () => {
-  const navigation =
-    useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
   const [secureEntry, setSecureEntry] = useState(true);
 
   const handleGoBack = () => {
@@ -45,7 +44,7 @@ const Login: FC<NativeStackScreenProps<AuthStackParams, 'login'>> = () => {
 
   const handleLogin = () => {
     //validar depois qnd tiver firebase
-    navigation.navigate('BottomTab', { screen: 'HiveList' });
+    navigation.navigate('bottomTab', { screen: 'hiveList' });
   };
 
   return (
@@ -144,7 +143,7 @@ const Login: FC<NativeStackScreenProps<AuthStackParams, 'login'>> = () => {
 
             <TouchableOpacity style={styles.googleButtonContainer}>
               <Image
-                source={require('../../../assets/google.png')}
+                source={require('../../../../assets/google.png')}
                 style={styles.googleImage}
               />
               <Text style={styles.googleText}>Continuar com o Google</Text>

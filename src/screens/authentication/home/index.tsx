@@ -3,25 +3,25 @@ import React, { FC } from 'react';
 import { colors } from '../../../utils/Colors';
 import { fonts } from '../../../utils/Fonts';
 import { useNavigation } from '@react-navigation/native';
-import { AuthStackParams } from '../../../../types';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AuthStackParams, RootStackParams } from '../../../../types';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 
 const Home: FC<NativeStackScreenProps<AuthStackParams, 'home'>> = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
 
   const handleLogin = () => {
-    navigation.navigate('Login');
+    navigation.navigate('authentication', { screen: 'login' });
   };
 
   const handleSignup = () => {
-    navigation.navigate('SignUp');
+    navigation.navigate('authentication', { screen: 'signUp' });
   };
 
   return (
     <View style={styles.container}>
 
-      <Image source={require('../../../assets/google.png')} style={styles.logo} />
-      <Image source={require('../../../assets/homeImage.jpg')} style={styles.bannerImage} />
+      <Image source={require('../../../../assets/logo.png')} style={styles.logo} />
+      <Image source={require('../../../../assets/homeImage.jpg')} style={styles.bannerImage} />
 
       <Text style={styles.title}>Lorem ipsum dolor.</Text>
       <Text style={styles.subTitle}>
