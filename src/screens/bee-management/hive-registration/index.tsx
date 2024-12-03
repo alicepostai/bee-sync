@@ -1,18 +1,19 @@
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import React, { FC } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as Yup from 'yup';
-import ComboBox from '../../../components/forms/combo-box';
+import { MainAppParams } from '../../../../types';
 import { species } from '../../../constants/lists/BeeSpeciesList';
 import { boxType } from '../../../constants/lists/BoxType';
 import { hiveOrigin } from '../../../constants/lists/HiveOrigin';
 import { states } from '../../../constants/lists/States';
 import { colors } from '../../../utils/Colors';
 import { fonts } from '../../../utils/Fonts';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { MainAppParams } from '../../../../types';
+import ImageComboBox from '../../../components/combo-box/ImageComboBox';
+import TextComboBox from '../../../components/combo-box/TextComboBox';
 
 const HiveRegistration: FC<NativeStackScreenProps<MainAppParams, 'hiveRegistration'>> = () => {
   const navigation = useNavigation();
@@ -69,7 +70,7 @@ const HiveRegistration: FC<NativeStackScreenProps<MainAppParams, 'hiveRegistrati
 
           <Text style={styles.headingText}>Cadastrar um enxame</Text>
 
-          <ComboBox
+          <ImageComboBox
             list={species}
             placeholder="Selecione a espécie"
             iconName="leaf-outline"
@@ -78,7 +79,7 @@ const HiveRegistration: FC<NativeStackScreenProps<MainAppParams, 'hiveRegistrati
             <Text style={styles.errorText}>{errors.species}</Text>
           )}
 
-          <ComboBox
+          <TextComboBox
             list={states}
             placeholder="Selecione o estado de origem"
             iconName="location-outline"
@@ -87,7 +88,7 @@ const HiveRegistration: FC<NativeStackScreenProps<MainAppParams, 'hiveRegistrati
             <Text style={styles.errorText}>{errors.state}</Text>
           )}
 
-          <ComboBox
+          <TextComboBox
             list={boxType}
             placeholder="Selecione o modelo de caixa"
             iconName="cube-outline"
@@ -96,7 +97,7 @@ const HiveRegistration: FC<NativeStackScreenProps<MainAppParams, 'hiveRegistrati
             <Text style={styles.errorText}>{errors.boxType}</Text>
           )}
 
-          <ComboBox
+          <TextComboBox
             list={hiveOrigin}
             placeholder="Selecione a origem do enxame"
             iconName="egg-outline"

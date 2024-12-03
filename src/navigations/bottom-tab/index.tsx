@@ -3,8 +3,6 @@ import React, { FC } from 'react';
 import { ColorValue, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { BottomTabParams } from '../../../types';
-import QRCodesButton from '../../components/buttons/qr-codes';
-import SettingsButton from '../../components/buttons/settings';
 import ActionHistory from '../../screens/bee-management/action-history';
 import GeneralData from '../../screens/bee-management/general-data';
 import HiveList from '../../screens/bee-management/hive-list';
@@ -12,6 +10,7 @@ import Map from '../../screens/bee-management/map';
 import Profile from '../../screens/user/profile';
 import Styles from '../../utils/Styles';
 import { colors } from '../../utils/Colors';
+import HeaderActionButton from '../../components/buttons/header-action';
 
 const BottomTab:FC = () => {
     const Tab = createBottomTabNavigator<BottomTabParams>();
@@ -24,12 +23,7 @@ const BottomTab:FC = () => {
           tabBarInactiveTintColor: 'gray',
           tabBarLabel: () => null,
           headerTintColor: colors.honey,
-          headerRight: () => (
-            <View style={Styles.headerContainer}>
-                <QRCodesButton />
-                <SettingsButton />
-            </View>
-          ),
+          headerRight: HeaderRight,
         })}>
 
         <Tab.Screen name="hiveList" component={HiveList} options={{ title: 'Enxames' }} />
@@ -39,6 +33,23 @@ const BottomTab:FC = () => {
         <Tab.Screen name="profile" component={Profile} options={{ title: 'Perfil'}} />
       </Tab.Navigator>
     );
+};
+
+const HeaderRight: React.FC = () => {
+  return (
+    <View style={Styles.headerContainer}>
+      <HeaderActionButton
+        iconName="qr-code-outline"
+        accessibilityLabel="Lista de QR Codes"
+        screenName="qrCodes"
+      />
+      <HeaderActionButton
+        iconName="settings-outline"
+        accessibilityLabel="Botão de Configurações"
+        screenName="appSettings"
+      />
+    </View>
+  );
 };
 
 const getTabBarIcon = ({route, size, color}:iconProps) => {

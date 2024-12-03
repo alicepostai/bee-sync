@@ -45,8 +45,8 @@ const SignupScreen: FC<NativeStackScreenProps<AuthStackParams, 'signUp'>> = () =
       initialValues={{ email: '', password: '', confirmPassword: '' }}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
-        console.log('Form values', values);
-        //add logica de cadastro
+        console.log('response', values);
+        //aqui precisa estar a lógica do firebase de cadastro
       }}
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (

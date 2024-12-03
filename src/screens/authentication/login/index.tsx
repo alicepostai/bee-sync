@@ -43,7 +43,7 @@ const Login: FC<NativeStackScreenProps<AuthStackParams, 'login'>> = () => {
   });
 
   const handleLogin = () => {
-    //validar depois qnd tiver firebase
+    //aqui precisa estar a lógica de login
     navigation.navigate('bottomTab', { screen: 'hiveList' });
   };
 

@@ -35,7 +35,15 @@ export type HiveData = {
     id: number;
 }
 
-export type ComboBoxProps = {
+export interface BaseComboBoxProps<T> {
+    list: T[];
+    placeholder: string;
+    iconName: string;
+    renderItem: (item: T) => React.ReactNode;
+    keyExtractor: (item: T) => string;
+}
+
+export type TextComboBoxProps = {
     list: ListItem[];
     placeholder: string;
     iconName: string;
@@ -46,10 +54,21 @@ export interface ListItem {
     name: string;
 }
 
-export interface BeeSpecies extends ListItem {
+export type ImageComboBoxProps = {
+    list: BeeSpecies[];
+    placeholder: string;
+    iconName: string;
+};
+
+export interface BeeSpecies {
     id : number;
     name: string;
     scientificName: string;
     imageUrl: string;
 }
 
+export interface HeaderActionButtonProps {
+    iconName: string;
+    accessibilityLabel: string;
+    screenName: string;
+}
